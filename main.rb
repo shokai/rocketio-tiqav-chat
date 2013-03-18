@@ -16,11 +16,6 @@ io.on :disconnect do |session, type|
   io.push :chat, {:name => "system", :message => "bye <#{session}>"}
 end
 
-## catch all events
-io.on :* do |event, data|
-  puts ">>> #{event} - #{data.inspect}"
-end
-
 get '/' do
   haml :index
 end
