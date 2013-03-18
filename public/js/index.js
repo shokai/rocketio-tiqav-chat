@@ -25,6 +25,11 @@ io.on("error", function(err){
   console.error(err);
 });
 
+// catch all events
+io.on("*", function(event, data){
+  console.log(event + " - " + JSON.stringify(data));
+});
+
 var post = function(){
   var name = $("#chat #name").val();
   var message = $("#chat #message").val();
