@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'foreman'
-gem 'sinatra-rocketio', '>= 0.0.7'
+gem 'sinatra'
+gem 'sinatra-rocketio'
+gem 'eventmachine'
+gem 'event_emitter'
 gem 'thin'
+gem 'json'
 gem 'haml'
 gem 'sass'
