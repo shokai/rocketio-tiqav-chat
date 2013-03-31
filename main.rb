@@ -1,19 +1,19 @@
 io = Sinatra::RocketIO
 
-io.on :chat do |data, from, type|
-  puts "#{data['name']} : #{data['message']}  (from:#{from}, type:#{type})"
+io.on :chat do |data, client|
+  puts "#{data['name']} : #{data['message']}  (from:#{client.session}, type:#{client.type})"
   io.push :chat, data
 end
 
-io.on :connect do |session, type|
-  puts "new client <#{session}> (type:#{type})"
-  io.push :chat, {:name => "system", :message => "new #{type} client <#{session}>"}
-  io.push :chat, {:name => "system", :message => "welcome <#{session}>"}, {:to => session}
+io.on :connect do |client|
+  puts "new client <#{client.session}> (type:#{client.type})"
+  io.push :chat, {:name => "system", :message => "new #{client.type} client <#{client.session}>"}
+  io.push :chat, {:name => "system", :message => "welcome <#{client.session}>"}, {:to => client.session}
 end
 
-io.on :disconnect do |session, type|
-  puts "disconnect client <#{session}> (type:#{type})"
-  io.push :chat, {:name => "system", :message => "bye <#{session}>"}
+io.on :disconnect do |client|
+  puts "disconnect client <#{client.session}> (type:#{client.type})"
+  io.push :chat, {:name => "system", :message => "bye <#{client.session}>"}
 end
 
 get '/' do
