@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    backports (3.1.1)
+    backports (3.2.0)
     daemons (1.1.9)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
@@ -51,7 +51,7 @@ GEM
       sinatra
       sinatra-cometio (>= 0.4.3)
       sinatra-websocketio (>= 0.2.3)
-    sinatra-websocketio (0.2.3)
+    sinatra-websocketio (0.2.4)
       em-websocket (>= 0.5.0)
       event_emitter (>= 0.2.4)
       eventmachine (>= 1.0.0)
