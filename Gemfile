@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'foreman'
+gem 'thin'
 gem 'sinatra'
 gem 'sinatra-rocketio'
 gem 'eventmachine'
 gem 'event_emitter'
-gem 'thin'
 gem 'json'
 gem 'haml'
 gem 'sass'
