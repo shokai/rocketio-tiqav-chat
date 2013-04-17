@@ -5,7 +5,7 @@ Sinatra Rocket I/O Sample Chat
   * https://github.com/shokai/sinatra-rocketio
 * http://rocketio-chat.herokuapp.com
   * comet only, because Heroku doesn't support websocket
-* http://dev.shokai.org:4000
+* http://chat.shokai.org
   * WebSocket and Comet
 
 
