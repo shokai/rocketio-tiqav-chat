@@ -21,7 +21,7 @@ Run
 ---
 
     % export PORT=5000
-    % export WS_PORT=8080
+    % export WS_PORT=9000
     % foreman start
 
 => http://localhost:5000
@@ -31,5 +31,6 @@ Deploy
 ------
 
     % heroku create --stack cedar
+    % heroku config:set WEBSOCKET=false
     % git push heroku master
     % heroku open
