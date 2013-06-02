@@ -13,21 +13,20 @@ io.on("chat", function(data){
 });
 
 io.on("connect", function(){
-  console.log("connect!! "+io.session);
   $("#type").text("type : "+io.type);
 });
 
 io.on("disconnect", function(){
-  console.log("disconnect");
+  $("#type").text(io.type+" disconnect");
 });
 
 io.on("error", function(err){
-  console.error(err);
+  if(typeof console !== "undefined") console.error(err);
 });
 
 // catch all events
 io.on("*", function(event, data){
-  console.log(event + " - " + JSON.stringify(data));
+  if(typeof console !== "undefined") console.log(event + " - " + JSON.stringify(data));
 });
 
 var post = function(){
