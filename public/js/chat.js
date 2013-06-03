@@ -12,21 +12,20 @@ io.on("chat", function(data){
   $("#chat #timeline").prepend(m);
 });
 
+io.on("client_count", function(count){
+  $("#client_count").text("users:"+count);
+});
+
 io.on("connect", function(){
-  $("#type").text("type : "+io.type);
+  $("#status").text("type : "+io.type);
 });
 
 io.on("disconnect", function(){
-  $("#type").text(io.type+" disconnect");
+  $("#status").text(io.type+" disconnect");
 });
 
 io.on("error", function(err){
   if(typeof console !== "undefined") console.error(err);
-});
-
-// catch all events
-io.on("*", function(event, data){
-  if(typeof console !== "undefined") console.log(event + " - " + JSON.stringify(data));
 });
 
 var post = function(){
