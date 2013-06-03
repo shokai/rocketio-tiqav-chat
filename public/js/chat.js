@@ -8,7 +8,9 @@ $(function(){
 var io = new RocketIO({channel: channel}).connect();
 
 io.on("chat", function(data){
-  var m = $("<li>").text(data.name + " : " +data.message);
+  var m = $("<li>");
+  m.append( $("<img>").attr("src", "http://twiticon.herokuapp.com/"+data.name+"/normal") );
+  m.append( $("<span>").text(data.name + " : " +data.message) );
   $("#chat #logs").prepend(m);
 });
 
