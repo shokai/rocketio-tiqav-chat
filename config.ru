@@ -7,6 +7,7 @@ if development?
   require 'sinatra/reloader'
 end
 require 'sinatra/rocketio'
+require 'digest/md5'
 
 require File.dirname(__FILE__)+'/main'
 

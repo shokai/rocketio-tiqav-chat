@@ -32,5 +32,6 @@ end
 
 get '/*' do |channel|
   @channel = channel
+  @bg_color = Digest::MD5.hexdigest(@channel)[0...6]
   haml :chat
 end

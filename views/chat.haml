@@ -6,6 +6,10 @@
     %link{:rel => 'stylesheet', :href => "/main.css", :type => 'text/css'}
     :javascript
       var channel = "#{@channel}";
+    :css
+      body {
+        background-color : ##{@bg_color};
+      }
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
     %script{:src => rocketio_js}
     %script{:src => "/js/chat.js"}
