@@ -19,6 +19,10 @@ io.on :disconnect do |client|
 end
 
 get '/' do
+  @channels = Hash.new{|h,k| h[k] = 0}
+  io.channels.each do |k,v|
+    @channels[v] += 1
+  end
   haml :index
 end
 

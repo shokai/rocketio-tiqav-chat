@@ -4,23 +4,25 @@
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'UTF-8'}
     %title Sinatra Rocket I/O chat
     %link{:rel => 'stylesheet', :href => "/main.css", :type => 'text/css'}
-    %script{:type => 'text/javascript', :src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
-    - ## load rocketio.js
-    %script{:type => 'text/javascript', :src => rocketio_js}
-    %script{:type => 'text/javascript', :src => "/js/index.js"}
-
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+    %script{:src => "/js/index.js"}
   %body
     %div#content
       %div#header
         %h1 Sinatra Rocket I/O Chat
         %div#type
       %div#main
-        %div#chat
-          %input{:id => 'name', :value => 'name', :size => 20}
-          %input{:id => 'message', :value => 'hello!!', :size => 80}
-          %input{:id => 'btn_send', :type => 'button', :value => 'post'}
-          %ul#timeline
-
+        %h2 create new chat
+        %div
+          %input{:type => :text, :size => 30, :id => :text_chat_name}
+          %input{:type => :button, :value => "go", :id => :btn_create_chat}
+        %h2 chats
+        %ul
+          - @channels.each do |c, count|
+            %li
+              %span
+                %a{:href => "/#{c}"}= c
+              %span (#{count} users)
       %hr
       %div#footer
         sinatra-rocketio v#{Sinatra::RocketIO::VERSION} -
