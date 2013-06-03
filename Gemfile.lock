@@ -83,5 +83,6 @@ DEPENDENCIES
   json
   sass
   sinatra
+  sinatra-contrib
   sinatra-rocketio
   thin

@@ -9,7 +9,7 @@ var io = new RocketIO({channel: channel}).connect();
 
 io.on("chat", function(data){
   var m = $("<li>").text(data.name + " : " +data.message);
-  $("#chat #timeline").prepend(m);
+  $("#chat #logs").prepend(m);
 });
 
 io.on("client_count", function(count){

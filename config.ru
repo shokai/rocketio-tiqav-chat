@@ -6,6 +6,7 @@ if development?
   $stdout.sync = true
   require 'sinatra/reloader'
 end
+require 'sinatra/content_for'
 require 'sinatra/rocketio'
 require 'digest/md5'
 

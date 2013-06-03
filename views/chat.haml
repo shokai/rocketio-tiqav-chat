@@ -1,35 +1,24 @@
-!!! XHTML
-%html
-  %head
-    %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'UTF-8'}
-    %title= %Q{"#{@channel}" - #{app_name}}
-    %link{:rel => 'stylesheet', :href => "/main.css", :type => 'text/css'}
-    :javascript
-      var channel = "#{@channel}";
-    :css
-      body {
-        background-color : ##{@bg_color};
-      }
-    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
-    %script{:src => rocketio_js}
-    %script{:src => "/js/chat.js"}
-  %body
-    %div#content
-      %div#header
-        %h1= %Q{"#{@channel}" - #{app_name}}
-        %div#status
-          %span#connection
-          %span -
-          %span#client_count
+- content_for :html_head do
+  :javascript
+    var channel = "#{@channel}";
+  :css
+    body {
+      background-color : ##{@bg_color};
+    }
 
-      %div#main
-        %div#chat
-          %input{:id => 'name', :value => 'name', :size => 20}
-          %input{:id => 'message', :value => 'hello!!', :size => 80}
-          %input{:id => 'btn_send', :type => 'button', :value => 'post'}
-          %ul#timeline
-      %hr
-      %div#footer
-        sinatra-rocketio v#{Sinatra::RocketIO::VERSION} -
-        - src_url = 'https://github.com/shokai/rocketio-chat-sample'
-        %a{:href => src_url} #{src_url}
+- content_for :html_foot do
+  %script{:src => rocketio_js}
+  %script{:src => "/js/chat.js"}
+
+- content_for :header do
+  %h1= %Q{"#{@channel}" - #{app_name}}
+  %div#status
+    %span#connection
+      %span -
+      %span#client_count
+
+%div#chat
+  %input{:id => 'name', :value => 'name', :size => 20}
+  %input{:id => 'message', :value => 'hello!!', :size => 80}
+  %input{:id => 'btn_send', :type => 'button', :value => 'post'}
+  %ul#logs

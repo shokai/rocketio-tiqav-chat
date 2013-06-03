@@ -32,6 +32,7 @@ end
 
 get '/*' do |channel|
   @channel = channel
+  @title = %Q{"#{@channel}" - #{app_name}}
   @bg_color = Digest::MD5.hexdigest(@channel)[0...6]
   haml :chat
 end

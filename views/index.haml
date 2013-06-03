@@ -1,29 +1,17 @@
-!!! XHTML
-%html
-  %head
-    %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'UTF-8'}
-    %title= app_name
-    %link{:rel => 'stylesheet', :href => "/main.css", :type => 'text/css'}
-    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
-    %script{:src => "/js/index.js"}
-  %body
-    %div#content
-      %div#header
-        %h1= app_name
-      %div#main
-        %h2 create new chat
-        %div
-          %input{:type => :text, :size => 30, :id => :text_chat_name}
-          %input{:type => :button, :value => "go", :id => :btn_create_chat}
-        %h2 chats
-        %ul
-          - @channels.each do |c, count|
-            %li
-              %span
-                %a{:href => "/#{c}"}= c
-              %span (#{count} users)
-      %hr
-      %div#footer
-        sinatra-rocketio v#{Sinatra::RocketIO::VERSION} -
-        - src_url = 'https://github.com/shokai/rocketio-chat-sample'
-        %a{:href => src_url} #{src_url}
+- content_for :html_foot do
+  %script{:src => "/js/index.js"}
+
+- content_for :header do
+  %h1= app_name
+
+%h2 create new chat
+%div
+  %input{:type => :text, :size => 30, :id => :text_chat_name}
+  %input{:type => :button, :value => "go", :id => :btn_create_chat}
+%h2 chats
+%ul
+- @channels.each do |c, count|
+  %li
+    %span
+      %a{:href => "/#{c}"}= c
+    %span (#{count} users)
