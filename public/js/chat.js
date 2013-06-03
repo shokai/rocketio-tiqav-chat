@@ -5,7 +5,7 @@ $(function(){
   });
 });
 
-var io = new RocketIO().connect();
+var io = new RocketIO({channel: channel}).connect();
 
 io.on("chat", function(data){
   var m = $("<li>").text(data.name + " : " +data.message);
