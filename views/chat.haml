@@ -12,9 +12,12 @@
   %body
     %div#content
       %div#header
-        %h1 Sinatra Rocket I/O Chat
-        %div#client_count
+        %h1 RocketIO Chat
         %div#status
+          %span#connection
+          %span -
+          %span#client_count
+
       %div#main
         %div#chat
           %input{:id => 'name', :value => 'name', :size => 20}

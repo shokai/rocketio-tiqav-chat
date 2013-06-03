@@ -1,15 +1,29 @@
 
 $font_black : #222;
 
-@mixin content {
-  div {
-    margin : 10px;
-    font-size : 95%;
-  }
+a, a:hover, a:visited {
+  color : #4B7EC2;
+}
+
+html {
+  # height : 100%;
+  margin : 0px;
+  padding : 0px;
 }
 
 body {
-  @include content;
-  background-color : #EEE;
+  background-color : #B9D98F;
   color : $font_black;
+  height : 100%;
+}
+
+#content {
+  background-color : #FFF;
+  height : 100%;
+  margin : 10px;
+  padding : 10px;
+}
+
+#footer {
+  text-align : right;
 }

@@ -17,11 +17,11 @@ io.on("client_count", function(count){
 });
 
 io.on("connect", function(){
-  $("#status").text("type : "+io.type);
+  $("#connection").text("connect("+io.type+")");
 });
 
 io.on("disconnect", function(){
-  $("#status").text(io.type+" disconnect");
+  $("#connection").text(io.type+" disconnect");
 });
 
 io.on("error", function(err){
