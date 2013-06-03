@@ -8,8 +8,11 @@ $(function(){
 var io = new RocketIO({channel: channel}).connect();
 
 io.on("chat", function(data){
-  var m = $("<li>").text(data.name + " : " +data.message);
-  $("#logs").prepend(m);
+  var line = $("<li>");
+  line.append($("<span>").text(data.name));
+  line.append($("<span>").text(" : "));
+  line.append($("<span>").html(data.message.markup()));
+  $("#logs").prepend(line);
 });
 
 io.on("client_count", function(count){
@@ -34,4 +37,22 @@ var post = function(){
   if(message.length < 1) return;
   io.push("chat", {name: name, message: message});
   $("#message").val("");
+};
+
+String.prototype.markup = function(){
+  return this.escape_html().split(/(\s+)/).map(function(i){
+    if(i.match(/^\s+$/)) return i;
+    if(i.match(/^https?\:\/\/[^\s]+\.(jpe?g|gif|png)$/i)){
+      return i.replace(/^(https?\:\/\/[^\s]+)\.(jpe?g|gif|png)$/igm, '<img src="$1.$2">');
+    }
+    return i.replace(/^(https?\:\/\/[^\s]+)$/igm, '<a href="$1">$1</a>');
+  }).join('');
+};
+
+String.prototype.escape_html = function(){
+  var span = document.createElement('span');
+  var txt =  document.createTextNode('');
+  span.appendChild(txt);
+  txt.data = this;
+  return span.innerHTML;
 };
