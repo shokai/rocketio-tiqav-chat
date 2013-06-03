@@ -1,6 +1,6 @@
 $(function(){
-  $("#chat #btn_send").click(post);
-  $("#chat #message").keydown(function(e){
+  $("#btn_send").click(post);
+  $("#message").keydown(function(e){
     if(e.keyCode == 13) post();
   });
 });
@@ -9,7 +9,7 @@ var io = new RocketIO({channel: channel}).connect();
 
 io.on("chat", function(data){
   var m = $("<li>").text(data.name + " : " +data.message);
-  $("#chat #logs").prepend(m);
+  $("#logs").prepend(m);
 });
 
 io.on("client_count", function(count){
@@ -29,9 +29,9 @@ io.on("error", function(err){
 });
 
 var post = function(){
-  var name = $("#chat #name").val();
-  var message = $("#chat #message").val();
+  var name = $("#name").val();
+  var message = $("#message").val();
   if(message.length < 1) return;
   io.push("chat", {name: name, message: message});
-  $("#chat #message").val("");
+  $("#message").val("");
 };
