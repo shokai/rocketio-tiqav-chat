@@ -11,7 +11,9 @@
   %script{:src => "/js/chat.js"}
 
 - content_for :header do
-  %h1= %Q{"#{@channel}" - #{app_name}}
+  %div
+    %a{:href => "/"} top
+  %h1= %Q{"#{@channel}"}
   %div#status
     %span#connection
       %span -
