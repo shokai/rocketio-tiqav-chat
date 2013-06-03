@@ -2,14 +2,14 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'UTF-8'}
-    %title Sinatra Rocket I/O chat
+    %title= app_name
     %link{:rel => 'stylesheet', :href => "/main.css", :type => 'text/css'}
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
     %script{:src => "/js/index.js"}
   %body
     %div#content
       %div#header
-        %h1 RocketIO Chat
+        %h1= app_name
       %div#main
         %h2 create new chat
         %div

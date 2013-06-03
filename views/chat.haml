@@ -2,7 +2,7 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'UTF-8'}
-    %title Sinatra Rocket I/O chat
+    %title= %Q{"#{@channel}" - #{app_name}}
     %link{:rel => 'stylesheet', :href => "/main.css", :type => 'text/css'}
     :javascript
       var channel = "#{@channel}";
@@ -16,7 +16,7 @@
   %body
     %div#content
       %div#header
-        %h1 RocketIO Chat
+        %h1= %Q{"#{@channel}" - #{app_name}}
         %div#status
           %span#connection
           %span -

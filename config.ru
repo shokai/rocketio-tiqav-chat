@@ -9,7 +9,8 @@ end
 require 'sinatra/rocketio'
 require 'digest/md5'
 
-require File.dirname(__FILE__)+'/main'
+require File.expand_path 'helper', File.dirname(__FILE__)
+require File.expand_path 'main', File.dirname(__FILE__)
 
 set :haml, :escape_html => true
 set :cometio, :timeout => 120, :post_interval => 1
