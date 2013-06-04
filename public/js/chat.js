@@ -29,6 +29,18 @@ var ImageSearch = function(io){
   };
 };
 
+var ChatInput = function(target){
+  var self = this;
+  new EventEmitter().apply(this);
+  this.target = (target instanceof jQuery) ? target : $(target);
+  var last_val = null;
+  this.target.keyup(function(e){
+    var val = self.target.val();
+    if(last_val !== val) self.emit("change", val);
+    last_val = val;
+  });
+};
+
 var io = new RocketIO({channel: channel}).connect();
 var img_search = new ImageSearch(io);
 
@@ -37,9 +49,9 @@ $(function(){
   $("#message").keydown(function(e){
     if(e.keyCode == 13) post();
   });
-  $("#message").keyup(function(e){
-    if(e.keyCode == 13) return;
-    img_search.search($("#message").val());
+  var chat_input = new ChatInput("#message");
+  chat_input.on("change", function(val){
+    img_search.search(val);
   });
 });
 
