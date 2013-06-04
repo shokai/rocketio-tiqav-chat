@@ -1,6 +1,7 @@
-Sinatra::RocketIO Sample Chat
-==============================
-- sample chat app for Sinatra::RocketIO
+RocketTiqav Chat
+================
+RocketTiqav Chat is a Image-chat using Sinatra::RocketIO and Tiqav.com.
+
 - https://github.com/shokai/sinatra-rocketio
 
 
