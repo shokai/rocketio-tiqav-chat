@@ -1,5 +1,15 @@
 io = Sinatra::RocketIO
 logs = Hash.new{|h,k| h[k] = [] }
+
+io.on :start do
+  max_log = (ENV['MAX_LOG_SIZE']||1000).to_i
+  EM::add_periodic_timer 60 do
+    logs.each do |channel, log|
+      logs[channel] = log[(-1*max_log)..(-1)] if log.size > max_log
+    end
+  end
+end
+
 io.on :reset_log do |data, client|
   logs.delete client.channel
   io.push :reset_log, nil, :channel => client.channel

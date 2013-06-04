@@ -37,6 +37,7 @@ run app
 
     % export PORT=5000
     % export WS_PORT=9000
+    % export MAX_LOG_SIZE=1000
     % foreman start
 
 => http://localhost:5000
@@ -47,6 +48,7 @@ Deploy
 
     % heroku create --stack cedar
     % heroku config:set WEBSOCKET=false
+    % heroku config:set MAX_LOG_SIZE=1000
     % heroku addons:add memcachier:dev
     % git push heroku master
     % heroku open
