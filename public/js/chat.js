@@ -80,7 +80,7 @@ io.on("chat", function(data){
 });
 
 io.on("client_count", function(count){
-  $("#client_count").text("users:"+count);
+  $("#client_count").text(count+" users");
 });
 
 io.on("connect", function(){

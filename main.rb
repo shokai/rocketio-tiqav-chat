@@ -22,7 +22,7 @@ io.on :disconnect do |client|
   puts "disconnect client <#{client.session}> (type:#{client.type} channel:#{client.channel})"
   io.push :chat, {:name => "system", :message => "bye <#{client.session}>"}, :channel => client.channel
   logs[client.channel] << {:name => "system", :message => "bye <#{client.session}>"}
-  io.push :client_info, {:websocket => io.sessions[:websocket].size, :comet => io.sessions[:comet].size}, :channel => client.channel
+  io.push :client_count, io.channels.values.select{|c| c == client.channel.to_s}.size, :channel => client.channel
 end
 
 io.on :img_search do |word, client|
