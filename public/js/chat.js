@@ -61,6 +61,7 @@ $(function(){
 img_search.on("result", function(res){
   $("#img_select").html("");
   $("#img_select_status").text( res.imgs.length > 0 ? 'search : "'+res.word+'"' : "" );
+  if($("#message").val().length < 1) return;
   for(var i = 0; i < res.imgs.length; i++){
     (function(){
       var img_url = res.imgs[i];
