@@ -1,17 +1,22 @@
-Sinatra Rocket I/O Sample Chat
+Sinatra::RocketIO Sample Chat
 ==============================
-- sample chat app for Sinatra Rocket I/O
-  - https://github.com/shokai/sinatra-rocketio
-- http://rocketio-chat.herokuapp.com
-  - comet only, because Heroku doesn't support websocket
+- sample chat app for Sinatra::RocketIO
+- https://github.com/shokai/sinatra-rocketio
+
+
+Demo
+----
 - http://chat.shokai.org
   - WebSocket and Comet
+- http://rocketio-chat.herokuapp.com
+  - comet only, because Heroku doesn't support websocket
 
 
 Requirements
 ------------
 - Ruby 1.8.7 ~ 2.0.0
 - memcached
+- [Tiqav.com](http://tiqav.com)
 
 
 Install Dependencies
