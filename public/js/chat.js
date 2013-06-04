@@ -104,10 +104,10 @@ io.on("error", function(err){
 
 var post = function(str){
   var name = $("#name").val();
-  var message = str || $("#message").val();
+  var message = (typeof str === "string") ? str : $("#message").val();
   if(message.length < 1) return;
   io.push("chat", {name: name, message: message});
-  $("#message").val("");
+  $("#message").val("").focus();
 };
 
 String.prototype.markup = function(){
