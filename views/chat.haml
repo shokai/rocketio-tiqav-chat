@@ -13,6 +13,8 @@
 - content_for :header do
   %div
     %a{:href => "/"} top
+  %div.tools
+    %input{:type => :button, :value => "reset log", :id => :btn_reset_log}
   %h1= %Q{"#{@channel}"}
   %div#status
     %span#connection

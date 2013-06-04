@@ -1,5 +1,9 @@
 io = Sinatra::RocketIO
 logs = Hash.new{|h,k| h[k] = [] }
+io.on :reset_log do |data, client|
+  logs.delete client.channel
+  io.push :reset_log, nil, :channel => client.channel
+end
 
 io.on :chat do |data, client|
   puts "#{data['name']} : #{data['message']}  (from:#{client.session}, type:#{client.type})"

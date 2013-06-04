@@ -49,6 +49,9 @@ $(function(){
   $("#message").keydown(function(e){
     if(e.keyCode == 13) post();
   });
+  $("#btn_reset_log").click(function(){
+    io.push("reset_log");
+  });
   var chat_input = new ChatInput("#message");
   chat_input.on("change", function(val){
     img_search.search(val);
@@ -69,6 +72,10 @@ img_search.on("result", function(res){
       $("#img_select").append( $("<li>").html(img_tag) );
     })();
   }
+});
+
+io.on("reset_log", function(){
+  $("#logs").html("");
 });
 
 io.on("chat", function(data){
