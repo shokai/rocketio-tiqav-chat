@@ -1,3 +1,4 @@
+
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require
@@ -10,6 +11,7 @@ require 'sinatra/content_for'
 require 'sinatra/rocketio'
 require 'digest/md5'
 
+require File.expand_path 'cache', File.dirname(__FILE__)
 require File.expand_path 'helper', File.dirname(__FILE__)
 require File.expand_path 'main', File.dirname(__FILE__)
 

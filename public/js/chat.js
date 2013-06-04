@@ -6,16 +6,21 @@ var ImageSearch = function(io){
   io.on("img_search", function(data){
     if(!data || typeof data.word !== "string" || !(data.imgs instanceof Array)) return;
     cache[data.word] = data.imgs;
-    self.emit("result", data);
+    self.emit("result", data.imgs);
   });
   var eid = null;
+  var last_word = null;
   this.search = function(word){
-    if(typeof word !== "string" || word.length < 1) return;
-    if(!!cache[word]){
+    if(!!eid) clearTimeout(eid);
+    if(typeof word !== "string") return;
+    if(word.length < 1){
+      self.emit("result", []);
+      return;
+    }
+    if(cache[word] instanceof Array && cache[word].length > 0){
       self.emit("result", cache[word]);
       return;
     }
-    if(!!eid) clearTimeout(eid);
     eid = setTimeout(function(){
       eid = null;
       cache[word] = [];
@@ -23,6 +28,9 @@ var ImageSearch = function(io){
     }, 300);
   };
 };
+
+var io = new RocketIO({channel: channel}).connect();
+var img_search = new ImageSearch(io);
 
 $(function(){
   $("#btn_send").click(post);
@@ -34,9 +42,6 @@ $(function(){
     img_search.search($("#message").val());
   });
 });
-
-var io = new RocketIO({channel: channel}).connect();
-var img_search = new ImageSearch(io);
 
 img_search.on("result", function(imgs){
   $("#img_select").html("");

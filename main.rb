@@ -22,10 +22,14 @@ io.on :img_search do |word, client|
   next if !word.kind_of? String or word.size < 1
   puts "tiqav search : #{word}"
   begin
-    imgs = Tiqav.search word
-    io.push :img_search, {:imgs => imgs[0...5].map{|i| i.thumbnail }, :word => word}, :to => client.session
+    imgs = Cache.get word
+    unless imgs
+      imgs = Tiqav.search(word)[0...10].map{|i| i.thumbnail.to_s }
+      Cache.set word, imgs
+    end
+    io.push :img_search, {:imgs => imgs, :word => word}, :to => client.session
   rescue StandardError, Timeout::Error => e
-    STDERR.puts "tiqav erro : #{e}"
+    STDERR.puts e
   end
 end
 
