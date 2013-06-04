@@ -18,6 +18,17 @@ io.on :disconnect do |client|
   io.push :client_info, {:websocket => io.sessions[:websocket].size, :comet => io.sessions[:comet].size}, :channel => client.channel
 end
 
+io.on :img_search do |word, client|
+  next if !word.kind_of? String or word.size < 1
+  puts "tiqav search : #{word}"
+  begin
+    imgs = Tiqav.search word
+    io.push :img_search, {:imgs => imgs[0...5].map{|i| i.thumbnail }, :word => word}, :to => client.session
+  rescue StandardError, Timeout::Error => e
+    STDERR.puts "tiqav erro : #{e}"
+  end
+end
+
 get '/' do
   @channels = Hash.new{|h,k| h[k] = 0}
   io.channels.each do |k,v|

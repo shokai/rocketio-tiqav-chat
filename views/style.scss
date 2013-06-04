@@ -12,6 +12,7 @@ html {
 }
 
 body {
+  font: 12pt "Lucida Grande", Helvetica, Arial, sans-serif;
   color : $font_black;
   height : 100%;
 }
@@ -25,4 +26,17 @@ body {
 
 #footer {
   text-align : right;
+}
+
+ul#img_select {
+  list-style : none;
+}
+ul#img_select li {
+  padding : 5px;
+  background-color : #FFBBBB;
+  float : left
+}
+
+ul#logs {
+  clear : both;
 }
