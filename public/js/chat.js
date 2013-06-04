@@ -6,7 +6,7 @@ var ImageSearch = function(io){
   io.on("img_search", function(data){
     if(!data || typeof data.word !== "string" || !(data.imgs instanceof Array)) return;
     cache[data.word] = data.imgs;
-    self.emit("result", data.imgs);
+    self.emit("result", data);
   });
   var eid = null;
   var last_word = null;
@@ -14,11 +14,11 @@ var ImageSearch = function(io){
     if(!!eid) clearTimeout(eid);
     if(typeof word !== "string") return;
     if(word.length < 1){
-      self.emit("result", []);
+      self.emit("result", {imgs: [], word: ""});
       return;
     }
     if(cache[word] instanceof Array && cache[word].length > 0){
-      self.emit("result", cache[word]);
+      self.emit("result", {imgs: cache[word], word: ""});
       return;
     }
     eid = setTimeout(function(){
@@ -55,14 +55,16 @@ $(function(){
   });
 });
 
-img_search.on("result", function(imgs){
+img_search.on("result", function(res){
   $("#img_select").html("");
-  for(var i = 0; i < imgs.length; i++){
+  $("#img_select_status").text( res.imgs.length > 0 ? 'search : "'+res.word+'"' : "" );
+  for(var i = 0; i < res.imgs.length; i++){
     (function(){
-      var img_url = imgs[i];
+      var img_url = res.imgs[i];
       var img_tag = $("<img>").attr("src", img_url).click(function(e){
         post(img_url);
         $("#img_select").html("");
+        $("#img_select_status").html("");
       });
       $("#img_select").append( $("<li>").html(img_tag) );
     })();
