@@ -1,5 +1,5 @@
 helpers do
   def app_name
-    "RocketIO Chat"
+    "RocketTiqav Chat"
   end
 end
