@@ -1,8 +1,8 @@
 RocketTiqav Chat
 ================
-RocketTiqav Chat is a Image-chat using Sinatra::RocketIO and Tiqav.com.
+RocketTiqav Chat is a Image-chat using [Sinatra::RocketIO](https://github.com/shokai/rocketio-chat-sample) and [Tiqav.com](http://tiqav.com).
 
-- https://github.com/shokai/sinatra-rocketio
+- https://github.com/shokai/rocketio-chat-sample
 
 
 Demo
