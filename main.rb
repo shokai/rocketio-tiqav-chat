@@ -28,14 +28,12 @@ io.on :connect do |client|
   end
   io.push :chat, {:name => "system", :message => "new #{client.type} client <#{client.session}>"}, :channel => client.channel
   io.push :chat, {:name => "system", :message => "welcome <#{client.session}>"}, :to => client.session
-  logs[client.channel] << {:name => "system", :message => "welcome <#{client.session}>"}
   io.push :client_count, io.channels.values.select{|c| c == client.channel}.size, :channel => client.channel
 end
 
 io.on :disconnect do |client|
   puts "disconnect client <#{client.session}> (type:#{client.type} channel:#{client.channel})"
   io.push :chat, {:name => "system", :message => "bye <#{client.session}>"}, :channel => client.channel
-  logs[client.channel] << {:name => "system", :message => "bye <#{client.session}>"}
   io.push :client_count, io.channels.values.select{|c| c == client.channel.to_s}.size, :channel => client.channel
 end
 
