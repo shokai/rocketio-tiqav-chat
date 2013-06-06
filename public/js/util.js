@@ -60,7 +60,7 @@ var InputWatcher = function(target){
   var last_val = null;
   var watch = function(){
     var val = self.target.val();
-    if(last_val !== val) self.emit("change", val);
+    if(!!last_val && last_val !== val) self.emit("change", val);
     last_val = val;
   };
   setInterval(watch, 100);
