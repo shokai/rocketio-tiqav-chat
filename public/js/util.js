@@ -58,9 +58,11 @@ var InputWatcher = function(target){
   new EventEmitter().apply(this);
   this.target = (target instanceof jQuery) ? target : $(target);
   var last_val = null;
-  this.target.keyup(function(e){
+  var watch = function(){
     var val = self.target.val();
     if(last_val !== val) self.emit("change", val);
     last_val = val;
-  });
+  };
+  setInterval(watch, 100);
+  this.target.keyup(watch);
 };
