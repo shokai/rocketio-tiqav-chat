@@ -7,6 +7,7 @@ class Cache
                         :password => (ENV['MEMCACHIER_PASSWORD'] || ENV['MEMCACHE_PASSWORD'])
                       }
                       )
+
   def self.cache
     @@cache
   end

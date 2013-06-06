@@ -1,50 +1,21 @@
-var ImageSearch = function(io){
-  var self = this;
-  if(!(io instanceof RocketIO)) throw new Error("Argument must be instance of RocketIO");
-  var cache = {};
-  new EventEmitter().apply(this);
-  io.on("img_search", function(data){
-    if(!data || typeof data.word !== "string" || !(data.imgs instanceof Array)) return;
-    cache[data.word] = data.imgs;
-    self.emit("result", data);
-  });
-  var eid = null;
-  var last_word = null;
-  this.search = function(word){
-    if(!!eid) clearTimeout(eid);
-    if(typeof word !== "string") return;
-    if(word.length < 1){
-      self.emit("result", {imgs: [], word: ""});
-      return;
-    }
-    if(cache[word] instanceof Array && cache[word].length > 0){
-      self.emit("result", {imgs: cache[word], word: ""});
-      return;
-    }
-    eid = setTimeout(function(){
-      eid = null;
-      cache[word] = [];
-      io.push("img_search", word);
-    }, 300);
-  };
-};
-
-var ChatInput = function(target){
-  var self = this;
-  new EventEmitter().apply(this);
-  this.target = (target instanceof jQuery) ? target : $(target);
-  var last_val = null;
-  this.target.keyup(function(e){
-    var val = self.target.val();
-    if(last_val !== val) self.emit("change", val);
-    last_val = val;
-  });
-};
-
 var io = new RocketIO({channel: channel}).connect();
 var img_search = new ImageSearch(io);
+var chat_input = null;
+
+var post = function(str){
+  var name = $("#name").val();
+  var message = (typeof str === "string") ? str : $("#message").val();
+  if(message.length < 1) return;
+  io.push("chat", {name: name, message: message});
+  $("#message").val("").focus();
+};
 
 $(function(){
+  chat_input = new InputWatcher("#message");
+  chat_input.on("change", function(val){
+    img_search.search(val);
+  });
+
   $("#btn_send").click(post);
   $("#message").keydown(function(e){
     if(e.keyCode == 13) post();
@@ -52,16 +23,15 @@ $(function(){
   $("#btn_reset_log").click(function(){
     io.push("reset_log");
   });
-  var chat_input = new ChatInput("#message");
-  chat_input.on("change", function(val){
-    img_search.search(val);
-  });
 });
 
+// on receive "image search event"
 img_search.on("result", function(res){
   $("#img_select").html("");
   $("#img_select_status").text( res.imgs.length > 0 ? 'search : "'+res.word+'"' : "" );
   if($("#message").val().length < 1) return;
+
+  // display images to select
   for(var i = 0; i < res.imgs.length; i++){
     (function(){
       var img_url = res.imgs[i];
@@ -75,18 +45,24 @@ img_search.on("result", function(res){
   }
 });
 
+
+// on receive "reset_log" event from server
 io.on("reset_log", function(){
   $("#logs").html("");
 });
 
+
+// on receive "chat" event from server
 io.on("chat", function(data){
   var line = $("<li>");
   line.append($("<span>").text(data.name));
   line.append($("<span>").text(" : "));
   line.append($("<span>").html(data.message.markup()));
-  $("#logs").prepend(line);
+  $("#logs").prepend(line); // display chat message
 });
 
+
+// on receive "client_count" event from server
 io.on("client_count", function(count){
   $("#client_count").text(count+" users");
 });
@@ -102,29 +78,3 @@ io.on("disconnect", function(){
 io.on("error", function(err){
   if(typeof console !== "undefined") console.error(err);
 });
-
-var post = function(str){
-  var name = $("#name").val();
-  var message = (typeof str === "string") ? str : $("#message").val();
-  if(message.length < 1) return;
-  io.push("chat", {name: name, message: message});
-  $("#message").val("").focus();
-};
-
-String.prototype.markup = function(){
-  return this.escape_html().split(/(\s+)/).map(function(i){
-    if(i.match(/^\s+$/)) return i;
-    if(i.match(/^https?\:\/\/[^\s]+\.(jpe?g|gif|png)$/i)){
-      return i.replace(/^(https?\:\/\/[^\s]+)\.(jpe?g|gif|png)$/igm, '<img src="$1.$2">');
-    }
-    return i.replace(/^(https?\:\/\/[^\s]+)$/igm, '<a href="$1">$1</a>');
-  }).join('');
-};
-
-String.prototype.escape_html = function(){
-  var span = document.createElement('span');
-  var txt =  document.createTextNode('');
-  span.appendChild(txt);
-  txt.data = this;
-  return span.innerHTML;
-};
