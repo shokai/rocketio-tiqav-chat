@@ -12,6 +12,11 @@ Demo
 - http://rocketio-chat.herokuapp.com
   - comet only, because Heroku doesn't support websocket
 
+<img src="http://shokai.org/archive/file/cf16be2d576ea548e92a3c1fc812fb66.gif">
+
+- incremental Image-search
+- post image by Mouse click
+- post text by pressing Enter key
 
 Requirements
 ------------
