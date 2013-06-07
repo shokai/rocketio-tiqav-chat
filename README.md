@@ -14,9 +14,9 @@ Demo
 
 <img src="http://shokai.org/archive/file/cf16be2d576ea548e92a3c1fc812fb66.gif">
 
-- incremental Image-search
-- post image by Mouse click
-- post text by pressing Enter key
+- incremental image search
+- post image by mouse click
+- post text by Enter-key press
 
 Requirements
 ------------
