@@ -28,6 +28,7 @@ Requirements
 Install Dependencies
 --------------------
 
+    % brew install memcached
     % gem install bundler foreman
     % bundle install
 
