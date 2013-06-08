@@ -2,7 +2,7 @@ RocketTiqav Chat
 ================
 RocketTiqav Chat is a Image-chat using [Sinatra::RocketIO](https://github.com/shokai/rocketio-chat-sample) and [Tiqav.com](http://tiqav.com).
 
-- https://github.com/shokai/rocketio-chat-sample
+- https://github.com/shokai/rocketio-tiqav-chat
 
 
 Demo
@@ -52,7 +52,7 @@ run app
 Deploy
 ------
 
-    % heroku create --stack cedar
+    % heroku create --stack cedar APP_NAME
     % heroku config:set WEBSOCKET=false
     % heroku config:set MAX_LOG_SIZE=1000
     % heroku addons:add memcachier:dev
