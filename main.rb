@@ -45,10 +45,10 @@ end
 ## on receive "img_search" message
 io.on :img_search do |word, client|
   next if !word.kind_of? String or word.size < 1
-  puts "tiqav search : #{word}"
   begin
     imgs = Cache.get word
     unless imgs
+      puts "tiqav search : #{word}"
       imgs = Tiqav.search(word)[0...10].map{|i| i.thumbnail.to_s }
       Cache.set word, imgs
     end
