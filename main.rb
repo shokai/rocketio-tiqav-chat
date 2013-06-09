@@ -53,7 +53,7 @@ io.on :img_search do |word, client|
         imgs = Tiqav.search(word)[0...10].map{|i| i.thumbnail.to_s }
         Cache.set word, imgs
       end
-     io.push :img_search, {:imgs => imgs, :word => word}, :to => client.session
+      io.push :img_search, {:imgs => imgs, :word => word}, :to => client.session
     end
   rescue StandardError, Timeout::Error => e
     STDERR.puts e
