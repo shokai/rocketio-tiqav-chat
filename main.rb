@@ -19,14 +19,14 @@ end
 
 ## on receive "chat" message
 io.on :chat do |data, client|
-  puts "#{data['name']} : #{data['message']}  (from:#{client.session}, type:#{client.type})"
+  puts "#{data['name']} : #{data['message']}  (from:#{client.session}, type:#{client.type}, address:#{client.address})"
   logs[client.channel] << data
   io.push :chat, data, :channel => client.channel
 end
 
 ## on new client
 io.on :connect do |client|
-  puts "new client <#{client.session}> (type:#{client.type} channel:#{client.channel})"
+  puts "new client <#{client.session}> (type:#{client.type} channel:#{client.channel}, address:#{client.address})"
   logs[client.channel].each do |log|
     io.push :chat, log, :to => client.session
   end
